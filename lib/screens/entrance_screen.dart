@@ -1,13 +1,19 @@
 import 'package:app_designs_megastore/details/details_page.dart';
 import 'package:app_designs_megastore/product/product.dart';
 import 'package:app_designs_megastore/product/product_card.dart';
+import 'package:app_designs_megastore/screens/profile_screen.dart';
 import 'package:app_designs_megastore/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../constants/colors.dart';
 import '../constants/dimensions.dart';
+import '../constants/text_messages.dart';
 import '../drawer/header_drawer.dart';
+import '../widgets/drawer_list.dart';
+import 'cart_screen.dart';
+import 'favorites_screen.dart';
+import 'search_screen.dart';
 
 class EntranceScreen extends StatefulWidget {
   const EntranceScreen({super.key});
@@ -17,7 +23,6 @@ class EntranceScreen extends StatefulWidget {
 }
 
 class _EntranceScreenState extends State<EntranceScreen> {
-  final ProjectTextMessages textMessages = ProjectTextMessages();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,11 +40,11 @@ class _EntranceScreenState extends State<EntranceScreen> {
           ),
           actions: [
             IconButton(
-              iconSize: double.parse('55'),
+              iconSize: ButtonHeights.hw60,
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EntranceScreen()),
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
                 );
               },
               icon: CircleAvatar(
@@ -57,13 +62,13 @@ class _EntranceScreenState extends State<EntranceScreen> {
         ),
         drawer: Drawer(
           shadowColor: AllColors.miyazaki,
-          backgroundColor: AllColors.iceClimber,
+          backgroundColor: AllColors.whiteWithOpacity,
           child: SingleChildScrollView(
             child: Container(
               child: Column(
                 children: const [
                   HeaderDrawer(),
-                  //HeaderDrawerList(),
+                  HeaderDrawerList(),
                 ],
               ),
             ),
@@ -77,13 +82,13 @@ class _EntranceScreenState extends State<EntranceScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(textMessages.subtitle,
+                Text(ProjectTextMessages.subtitle,
                     textAlign: TextAlign.center, style: LightTheme().theme.textTheme.displayMedium),
-                SizedBox(height: ButtonHeights.sizedBoxHeight),
-                Text(textMessages.title, style: LightTheme().theme.textTheme.displaySmall),
-                SizedBox(height: ButtonHeights.sizedBoxHeight),
+                SizedBox(height: ButtonHeights.hw5),
+                Text(ProjectTextMessages.title, style: LightTheme().theme.textTheme.displaySmall),
+                SizedBox(height: ButtonHeights.hw5),
                 const RowProduct(),
-                SizedBox(height: ButtonHeights.defaultSpace * 5.5),
+                SizedBox(height: ButtonHeights.height35),
                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
@@ -92,24 +97,25 @@ class _EntranceScreenState extends State<EntranceScreen> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(textMessages.popular,
+                            Text(ProjectTextMessages.popular,
                                 textAlign: TextAlign.center, style: LightTheme().theme.textTheme.titleMedium),
                             SizedBox(
-                              width: ButtonHeights.defaultSpace,
+                              width: ButtonHeights.customSizedBox_10,
                             ),
                             Container(
                               margin: MarginItems.right5Left5,
-                              child: Text(textMessages.dot, style: LightTheme().theme.textTheme.displaySmall),
+                              child: Text(ProjectTextMessages.dot, style: LightTheme().theme.textTheme.displaySmall),
                             ),
                             SizedBox(
-                              width: ButtonHeights.defaultSpace,
+                              width: ButtonHeights.customSizedBox_10,
                             ),
                             Container(
-                              margin: MarginItems.top10,
-                              child: Text(textMessages.pairing, style: LightTheme().theme.textTheme.displaySmall),
+                              margin: MarginItems.top8,
+                              child:
+                                  Text(ProjectTextMessages.pairing, style: LightTheme().theme.textTheme.displaySmall),
                             ),
                             SizedBox(
-                              width: ButtonHeights.defaultSpace,
+                              width: ButtonHeights.customSizedBox_10,
                             ),
                           ],
                         ),
@@ -146,10 +152,9 @@ class ColumnProduct extends StatelessWidget {
               children: [
                 //image section
                 Container(
-                  width: 130,
-                  height: 130,
+                  width: ButtonHeights.hw130,
+                  height: ButtonHeights.hw130,
                   decoration: BoxDecoration(
-                      color: AllColors.whiteWithOpacity,
                       borderRadius: BorderRadius.circular(ButtonHeights.radius12),
                       image: DecorationImage(fit: BoxFit.fill, image: AssetImage(demo_product[index].image))),
                   child: ListTile(
@@ -169,8 +174,8 @@ class ColumnProduct extends StatelessWidget {
 
                 Expanded(
                   child: Container(
-                    height: 100,
-                    width: 200,
+                    height: ButtonHeights.hw100,
+                    width: ButtonHeights.hw200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(ButtonHeights.radius12),
@@ -179,18 +184,18 @@ class ColumnProduct extends StatelessWidget {
                       color: AllColors.mercury,
                     ),
                     child: Padding(
-                      padding: PaddingItems.onlyLeft10,
+                      padding: PaddingItems.onlyLeft10top5,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(demo_product[index].title, maxLines: 1, style: LightTheme().theme.textTheme.titleSmall),
                           SizedBox(
-                            height: ButtonHeights.defaultSpace,
+                            height: ButtonHeights.customSizedBox_10,
                           ),
                           Text(demo_product[index].description,
                               maxLines: 1, style: LightTheme().theme.textTheme.labelMedium),
                           SizedBox(
-                            height: ButtonHeights.width15,
+                            height: ButtonHeights.customSizedBox_15,
                           ),
                           Padding(
                             padding: PaddingItems.onlyLeft150,
@@ -205,7 +210,7 @@ class ColumnProduct extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: ButtonHeights.defaultSpace,
+                            width: ButtonHeights.customSizedBox_10,
                           ),
                         ],
                       ),
@@ -216,35 +221,6 @@ class ColumnProduct extends StatelessWidget {
             ),
           );
         });
-
-    /**/
-    /*SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: List.generate(
-              demo_product.length,
-              (index) => Padding(
-                    padding: PaddingItems.onlyBottom,
-                    child: ProductCard(
-                      image: demo_product[index].image,
-                      title: demo_product[index].title,
-                      price: demo_product[index].price,
-                      bgColor: demo_product[index].bgColor,
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailsScreen(
-                                    product: demo_product[index],
-                                  )),
-                        );
-                      },
-                      height: ButtonHeights.forBottomProducts,
-                      width: ButtonHeights.forBottomProducts,
-                    ),
-                  ))),
-    );*/
   }
 }
 
@@ -258,11 +234,11 @@ class BottomNavBar extends StatelessWidget {
     return Container(
       color: AllColors.transpar,
       child: Padding(
-        padding: PaddingItems.symmet,
+        padding: PaddingItems.rl15T5B10,
         child: GNav(
             curve: Curves.easeInCubic,
             duration: const Duration(seconds: 1),
-            gap: 8,
+            gap: ButtonHeights.hw8,
             rippleColor: AllColors.lightGrey.withOpacity(0.4),
             backgroundColor: AllColors.transpar,
             activeColor: AllColors.black,
@@ -270,10 +246,40 @@ class BottomNavBar extends StatelessWidget {
             tabShadow: [BoxShadow(color: AllColors.downy.withOpacity(0.3), blurRadius: 8)],
             padding: PaddingItems.all,
             tabs: [
-              GButton(icon: Icons.home_rounded, text: ProjectTextMessages().homePage),
-              GButton(icon: Icons.search_rounded, text: ProjectTextMessages().searchingPage),
-              GButton(icon: Icons.favorite_border, text: ProjectTextMessages().favoritesPage),
-              GButton(icon: Icons.settings_outlined, text: ProjectTextMessages().settingsPage)
+              GButton(icon: Icons.home_rounded, text: ProjectTextMessages.homePage),
+              GButton(
+                  icon: Icons.search_rounded,
+                  text: ProjectTextMessages.searchingPage,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchScreen(),
+                      ),
+                    );
+                  }),
+              GButton(
+                  icon: Icons.favorite_border,
+                  text: ProjectTextMessages.favoritesPage,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FavoritesScreen(),
+                      ),
+                    );
+                  }),
+              GButton(
+                  icon: Icons.shopping_cart,
+                  text: ProjectTextMessages.cartPage,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CartScreen(),
+                      ),
+                    );
+                  })
             ]),
       ),
     );
@@ -310,23 +316,11 @@ class RowProduct extends StatelessWidget {
                 );
               },
               height: ButtonHeights.forProductHeight,
-              width: ButtonHeights.forProductWidth,
+              width: ButtonHeights.hw150,
             ),
           ),
         ),
       ),
     );
   }
-}
-
-class ProjectTextMessages {
-  final String subtitle = 'Mega Store';
-  final String title = 'Find out your Gadgets';
-  final String popular = 'Popular';
-  final String dot = '.';
-  final String pairing = 'Product pairing';
-  final String homePage = 'Home';
-  final String searchingPage = 'Search';
-  final String favoritesPage = 'Likes';
-  final String settingsPage = 'Settings';
 }

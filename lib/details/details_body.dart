@@ -1,11 +1,12 @@
-import 'package:app_designs_megastore/constants/colors.dart';
+import 'package:app_designs_megastore/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:app_designs_megastore/constants/colors.dart';
 import '../constants/dimensions.dart';
 import '../constants/lottie_items.dart';
+import '../constants/text_messages.dart';
 import '../product/product.dart';
-import '../screens/entrance_screen.dart';
+import '../screens/favorites_screen.dart';
 import '../widgets/details_column.dart';
 import '../widgets/details_icon.dart';
 import '../widgets/exandable_text_widget.dart';
@@ -17,10 +18,8 @@ class DetailsPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController textController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     double screenHeight = MediaQuery.of(context).size.height;
-    ButtonHeights(sayfaHeight: size.height);
 
     return SingleChildScrollView(
       child: Column(
@@ -35,7 +34,6 @@ class DetailsPageBody extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.only(top: 0, left: 0),
                     height: size.height * 0.6,
-                    color: AllColors.blossoms,
                     width: double.maxFinite,
                     child: Image.asset(
                       product?.image ?? '',
@@ -44,9 +42,9 @@ class DetailsPageBody extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: ButtonHeights.iconRight0_07 * screenHeight,
-                  left: ButtonHeights.iconLeft0_03 * screenHeight,
-                  top: ButtonHeights.iconTop0_04 * screenHeight,
+                  right: ButtonHeights.hw5,
+                  left: ButtonHeights.height20,
+                  top: ButtonHeights.customSizedBox_15,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -56,10 +54,10 @@ class DetailsPageBody extends StatelessWidget {
                         child: IconButton(
                           padding: PaddingItems.onlyRight10,
                           onPressed: () {
-                            Navigator.pop(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const EntranceScreen(),
+                                builder: (context) => const FavoritesScreen(),
                               ),
                             );
                           },
@@ -73,7 +71,7 @@ class DetailsPageBody extends StatelessWidget {
                   margin: EdgeInsets.only(top: screenHeight * 0.50),
                   height: screenHeight,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: product?.bgColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(ButtonHeights.radius50),
                       topRight: Radius.circular(ButtonHeights.radius80),
@@ -81,9 +79,9 @@ class DetailsPageBody extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: ButtonHeights.containerTop0_53 * screenHeight,
-                  left: ButtonHeights.iconTop0_04 * screenHeight,
-                  right: ButtonHeights.iconTop0_04 * screenHeight,
+                  top: ButtonHeights.containerTop380,
+                  left: ButtonHeights.height30,
+                  right: ButtonHeights.height30,
                   child: SizedBox(
                     height: screenHeight * 0.45,
                     child: Column(
@@ -92,49 +90,57 @@ class DetailsPageBody extends StatelessWidget {
                       children: [
                         AppColumn(title: product?.title ?? '', price: product?.price ?? 0),
                         SizedBox(
-                          height: ButtonHeights.customSizedBox_15 * screenHeight,
+                          height: ButtonHeights.radius12,
                         ),
                         const Expanded(child: SingleChildScrollView(child: ExpandableTextWidget())),
                         SizedBox(
-                          height: ButtonHeights.customSizedBox_10 * screenHeight,
+                          height: ButtonHeights.customSizedBox_10,
                         ),
                         Container(
                           height: screenHeight * 0.08,
                           decoration: BoxDecoration(
                             color: product?.bgColor,
                             borderRadius: BorderRadius.circular(ButtonHeights.radius12),
-                            border: Border.all(color: Colors.black, width: 1.0, style: BorderStyle.solid),
+                            border: Border.all(color: AllColors.black, width: 1.0, style: BorderStyle.solid),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(ButtonHeights.customPadding_20 * screenHeight, 0, 0, 0),
+                            padding: PaddingItems.onlyLeft10,
                             child: const ProductTextField(),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: ButtonHeights.height25),
-                          height: ButtonHeights.radius50,
-                          width: ButtonHeights.hw150,
-                          decoration: BoxDecoration(
-                            color: AllColors.mercury,
-                            border: Border.all(width: 1.0, style: BorderStyle.solid),
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(ButtonHeights.radius30),
-                              bottomLeft: Radius.circular(ButtonHeights.radius30),
-                              bottomRight: Radius.circular(ButtonHeights.radius30),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CartScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: MarginItems.symmet25,
+                            height: ButtonHeights.radius50,
+                            width: ButtonHeights.hw150,
+                            decoration: BoxDecoration(
+                              color: AllColors.mercury,
+                              border: Border.all(width: 1.0, style: BorderStyle.solid),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(ButtonHeights.height20),
+                                bottomLeft: Radius.circular(ButtonHeights.height20),
+                                bottomRight: Radius.circular(ButtonHeights.height20),
+                              ),
                             ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15.0),
-                                child: Text(
-                                  "Buy Now",
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  ProjectTextMessages.buyMessage,
                                   style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                              ),
-                              IconButton(icon: const Icon(Icons.shopping_cart), onPressed: () {}),
-                            ],
+                                const Icon(Icons.shopping_cart),
+                              ],
+                            ),
                           ),
                         )
                       ],

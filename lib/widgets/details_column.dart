@@ -25,7 +25,7 @@ class _AppColumnState extends State<AppColumn> {
 
   void _decreaseCounter() {
     setState(() {
-      itemCount > 0 ? itemCount-- : itemCount;
+      itemCount > 1 ? itemCount-- : itemCount;
     });
   }
 
@@ -41,7 +41,7 @@ class _AppColumnState extends State<AppColumn> {
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.w400,
-                fontSize: 25,
+                fontSize: ButtonHeights.height25,
               ),
         ),
         Padding(
@@ -49,11 +49,11 @@ class _AppColumnState extends State<AppColumn> {
           child: Row(
             children: [
               Container(
-                width: 120,
-                padding: const EdgeInsets.all(5),
+                width: ButtonHeights.hw120,
+                padding: PaddingItems.all5,
                 decoration: BoxDecoration(
                   color: AllColors.cerebralGrey,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(ButtonHeights.customSizedBox_10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +65,7 @@ class _AppColumnState extends State<AppColumn> {
                       style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                             color: Theme.of(context).colorScheme.onSecondary,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: ButtonHeights.height20,
                           ),
                     ),
                     quantityIcon(
@@ -73,8 +73,8 @@ class _AppColumnState extends State<AppColumn> {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 150,
+              SizedBox(
+                width: ButtonHeights.hw150,
               ),
               Text(
                 ('\$${widget.price}'),
@@ -98,11 +98,11 @@ Widget quantityIcon({
   return InkWell(
     onTap: onTap,
     child: Container(
-        width: 30,
-        height: 30,
+        width: ButtonHeights.height30,
+        height: ButtonHeights.height30,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(ButtonHeights.customSizedBox_10),
           shape: BoxShape.rectangle,
         ),
         child: Image.asset(iconName)),

@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        margin: MarginItems.top10,
+        margin: MarginItems.top8,
         decoration: BoxDecoration(
             image: DecorationImage(
               alignment: const AlignmentDirectional(-0.45, 0.5),
@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
             ),
             color: AllColors.lightGrey,
             shape: BoxShape.rectangle,
-            borderRadius: const BorderRadius.all(Radius.circular(20.0))),
+            borderRadius:  BorderRadius.all(Radius.circular(ButtonHeights.height20))),
       ),
     );
   }

@@ -8,18 +8,18 @@ class AppIcon extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final Color backgColor;
-  final double size;
 
   const AppIcon({
     Key? key,
     required this.icon,
     this.iconColor = Colors.black,
     this.backgColor = Colors.white30,
-    this.size = 40,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //double screenHeight = MediaQuery.of(context).size.height;
+    double size = ButtonHeights.size40;
     return Container(
         width: size,
         height: size,
@@ -27,7 +27,7 @@ class AppIcon extends StatelessWidget {
         child: IconButton(
           icon: Icon(icon),
           color: iconColor,
-          iconSize: IconSizes.iconSize16,
+          iconSize: ButtonHeights.iconSize16,
           onPressed: () {
             Navigator.pop(
               context,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 import '../constants/dimensions.dart';
+import '../constants/text_messages.dart';
 
 class ExpandableTextWidget extends StatefulWidget {
   const ExpandableTextWidget({super.key});
@@ -34,9 +35,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: ButtonHeights.defaultSpace,
-      ),
+      padding: PaddingItems.onlyBottom10,
       child: SizedBox(
         child: secondHalf.isEmpty
             ? Text(firstHalf)
@@ -51,8 +50,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                       },
                       child: Row(
                         children: [
-                          Text(
-                            'show details ',
+                          Text(ProjectTextMessages.showDetails,
                             style: TextStyle(color: AllColors.miyazaki),
                           ),
                           Icon(

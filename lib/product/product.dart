@@ -1,17 +1,19 @@
+import 'package:app_designs_megastore/screens/entrance_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/text_messages.dart';
+
 class Product {
-  final String image, title, description;
+  final String image, title;
   final double price;
   final Color bgColor;
+  String description = ProjectTextMessages.loremIpsum;
 
   Product({
     required this.image,
     required this.title,
     required this.price,
     this.bgColor = const Color(0xFFEFEFF2),
-    this.description =
-        "Eiusmod eiusmod veniam aliqua commodo dolore aliqua fugiat officia et exercitation excepteur minim adipisicing labore. Veniam consectetur sit consectetur quis veniam reprehenderit sunt commodo quis est voluptate qui fugiat esse. Veniam Lorem quis aute voluptate laboris deserunt.",
   });
 }
 

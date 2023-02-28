@@ -12,10 +12,7 @@ class AllColors {
   static Color get black => Colors.black;
   static Color get blossoms => const Color.fromARGB(255, 157, 58, 238);
   static Color get downy => const Color.fromARGB(255, 110, 212, 195);
-
   static Color get cerebralGrey => const Color.fromARGB(200, 209, 210, 255);
-  static Color get lynxWhite => const Color.fromARGB(247, 246, 247, 255);
   static Color get chefsWhite => const Color.fromARGB(244, 244, 245, 255);
-
   static Color get mercury => const Color.fromARGB(233, 235, 235, 235);
 }
